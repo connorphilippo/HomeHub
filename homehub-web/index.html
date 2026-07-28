@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1" />
+  <title>HomeHub</title>
+
+  <!-- PWA installability -->
+  <link rel="manifest" href="manifest.json" />
+  <meta name="theme-color" content="#FAFAF8" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <!-- iOS-specific PWA tags: iOS ignores manifest.json's display/icons
+       fields for "Add to Home Screen" and requires these instead. -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="HomeHub" />
+  <link rel="apple-touch-icon" href="icons/icon-180.png" />
+  <link rel="icon" type="image/png" href="icons/icon-192.png" />
+
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/main.css" />
+</head>
+<body>
+  <div id="app">
+
+    <!-- ---------- Home ---------- -->
+    <div class="screen active" id="screen-home"></div>
+
+    <!-- ---------- Notes ---------- -->
+    <div class="screen" id="screen-notes"></div>
+
+    <!-- ---------- Groceries ---------- -->
+    <div class="screen" id="screen-groceries"></div>
+
+    <!-- ---------- Calendar ---------- -->
+    <div class="screen" id="screen-calendar"></div>
+
+    <!-- ---------- Settings ---------- -->
+    <div class="screen" id="screen-settings"></div>
+
+    <!-- ---------- Bottom nav ---------- -->
+    <!-- Icon spans start empty and are populated by populateNavIcons() in
+         app.js on load — this file has no templating step, so any
+         placeholder syntax written directly here would render as literal
+         visible text rather than being replaced. -->
+    <nav class="bottom-nav">
+      <button class="nav-item active" data-screen="home">
+        <span class="nav-icon" data-icon="home"></span>
+        <span class="nav-label">Home</span>
+      </button>
+      <button class="nav-item" data-screen="notes">
+        <span class="nav-icon" data-icon="notes"></span>
+        <span class="nav-label">Notes</span>
+      </button>
+      <button class="nav-item" data-screen="groceries">
+        <span class="nav-icon" data-icon="groceries"></span>
+        <span class="nav-label">Groceries</span>
+      </button>
+      <button class="nav-item" data-screen="calendar">
+        <span class="nav-icon" data-icon="calendar"></span>
+        <span class="nav-label">Calendar</span>
+      </button>
+      <button class="nav-item" data-screen="settings">
+        <span class="nav-icon" data-icon="settings"></span>
+        <span class="nav-label">Settings</span>
+      </button>
+    </nav>
+
+    <!-- ---------- Voice capture modal ---------- -->
+    <div class="modal-overlay" id="voice-modal">
+      <div id="voice-modal-overlay-bg" style="position:absolute; inset:0"></div>
+      <div class="modal-sheet">
+        <div class="modal-header">
+          <button id="voice-modal-cancel" class="text-dim">Cancel</button>
+          <div style="font-weight:700; font-size:18px">Voice note</div>
+          <button id="voice-modal-save" onclick="handleSaveVoiceNote()" style="font-weight:700">Save</button>
+        </div>
+        <div class="modal-body" id="voice-modal-body"></div>
+        <div class="modal-footer">
+          <div class="mic-button-wrapper" id="voice-mic-wrapper">
+            <div class="mic-ring mic-ring-1"></div>
+            <div class="mic-ring mic-ring-2"></div>
+            <button class="mic-button" id="voice-modal-mic-btn" onclick="handleVoiceMicPress()" aria-label="Start or stop recording"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ---------- Note detail overlay ---------- -->
+    <div class="modal-overlay" id="note-detail-overlay" style="align-items:stretch">
+      <div class="modal-sheet" style="border-radius:0; height:100%; max-height:100%">
+        <div class="modal-header">
+          <button onclick="closeNoteDetail()" style="color:var(--accent)">Back</button>
+          <div style="font-weight:700">Note</div>
+          <div style="width:40px"></div>
+        </div>
+        <div class="modal-body" id="note-detail-content"></div>
+      </div>
+    </div>
+
+    <!-- ---------- Category editor overlay ---------- -->
+    <div class="modal-overlay" id="category-editor-overlay" style="align-items:stretch">
+      <div class="modal-sheet" style="border-radius:0; height:100%; max-height:100%">
+        <div class="modal-header">
+          <button onclick="closeCategoryEditor()" class="text-dim">Cancel</button>
+          <div style="font-weight:700">Category</div>
+          <button onclick="handleSaveCategory()" style="color:var(--accent); font-weight:700">Save</button>
+        </div>
+        <div class="modal-body" id="category-editor-content"></div>
+      </div>
+    </div>
+
+  </div>
+
+  <script src="js/icons.js"></script>
+  <script src="js/db.js"></script>
+  <script src="js/nlp.js"></script>
+  <script src="js/voice.js"></script>
+  <script src="js/theme.js"></script>
+  <script src="js/screens.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

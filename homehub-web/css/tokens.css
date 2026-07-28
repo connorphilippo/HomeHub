@@ -1,0 +1,92 @@
+/*
+  Design tokens ported directly from the React Native version's
+  src/theme/tokens.ts, so this web build looks like the same product
+  rather than a reskin. See that file's comments for the full rationale
+  (warm-paper neutrals so the 8 category colors read as "the colorful
+  part," single sage accent, category colors chosen to be mutually
+  distinguishable including for common color-vision deficiencies).
+*/
+
+:root {
+  /* Light theme (default) */
+  --bg: #FAFAF8;
+  --bg-raised: #FFFFFF;
+  --bg-sunken: #F0EFEB;
+  --text: #1C1B1A;
+  --text-dim: #4A4846;
+  --text-faint: #8C8985;
+  --border: #E4E1DB;
+  --accent: #5B7A6B;
+  --accent-deep: #41594D;
+  --accent-tint: #E4ECE7;
+  --on-accent: #FFFFFF;
+  --danger: #C0524A;
+  --warning: #C08A3E;
+  --success: #4F8F63;
+
+  /* Category colors — identical across light/dark, since these are meant
+     to hold their identity as "the groceries color" etc. regardless of
+     theme, the same way they do in the native build. */
+  --cat-groceries: #4F8F63;
+  --cat-cleaning: #3D8FA6;
+  --cat-maintenance: #B5602C;
+  --cat-thingstobuy: #8A5FB0;
+  --cat-reminders: #C08A3E;
+  --cat-garden: #6B9B37;
+  --cat-bills: #3E6E8E;
+  --cat-miscellaneous: #8C8985;
+
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-pill: 999px;
+
+  --space-xs: 4px;
+  --space-sm: 8px;
+  --space-md: 12px;
+  --space-lg: 16px;
+  --space-xl: 24px;
+  --space-xxl: 32px;
+
+  --touch-min: 48px;
+  --touch-comfortable: 56px;
+}
+
+[data-theme="dark"] {
+  --bg: #17181A;
+  --bg-raised: #1F2123;
+  --bg-sunken: #131415;
+  --text: #EDEBE7;
+  --text-dim: #B8B5B0;
+  --text-faint: #7A7876;
+  --border: #2A2C2F;
+  --accent: #6E9481;
+  --accent-deep: #8FB09E;
+  --accent-tint: #233029;
+  --on-accent: #0E1210;
+  --danger: #D9776F;
+  --warning: #D6A25C;
+  --success: #6FAE83;
+}
+
+/* Respects system preference automatically unless the person has
+   explicitly toggled a preference in-app (that override is applied via
+   the [data-theme] attribute above, set by js/theme.js). */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --bg: #17181A;
+    --bg-raised: #1F2123;
+    --bg-sunken: #131415;
+    --text: #EDEBE7;
+    --text-dim: #B8B5B0;
+    --text-faint: #7A7876;
+    --border: #2A2C2F;
+    --accent: #6E9481;
+    --accent-deep: #8FB09E;
+    --accent-tint: #233029;
+    --on-accent: #0E1210;
+    --danger: #D9776F;
+    --warning: #D6A25C;
+    --success: #6FAE83;
+  }
+}
